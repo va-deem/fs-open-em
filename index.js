@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const cors = require('cors');
 const morgan = require('morgan');
-morgan.token('body', (req, res) => JSON.stringify(req.body));
+morgan.token('body', (req) => JSON.stringify(req.body));
 
 const Person = require('./models/person');
 
@@ -74,7 +74,7 @@ const unknownEndpoint = (req, res) => {
   res.status(404).send({ error: 'unknown endpoint' });
 };
 
-app.use(unknownEndpoint)
+app.use(unknownEndpoint);
 
 const errorHandler = (err, req, res, next) => {
   console.error(err.message);
@@ -82,7 +82,7 @@ const errorHandler = (err, req, res, next) => {
   if (err.name === 'CastError') {
     return res.status(400).send({ error: 'malformatted id' });
   } else if (err.name === 'ValidationError') {
-    return res.status(400).json({ error: err.message })
+    return res.status(400).json({ error: err.message });
   }
 
   next(err);
@@ -91,6 +91,7 @@ const errorHandler = (err, req, res, next) => {
 // errorHandlershould be last among middlewares
 app.use(errorHandler);
 
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
