@@ -22,8 +22,8 @@ const personSchema = new mongoose.Schema({
     minLength: 3,
   },
   number: {
-    type: Number,
-    match: /\d{8,}/,
+    type: String,
+    minLength: 8,
   }
 });
 personSchema.plugin(uniqueValidator);
