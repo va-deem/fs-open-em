@@ -59,7 +59,7 @@ app.put('/api/persons/:id', (req, res, next) => {
 
 app.delete('/api/persons/:id', (req, res, next) => {
   const { id } = req.params;
-  console.log('Delete endpoint');
+
   Person.findByIdAndRemove(id)
     .then(() => res.status(204).end())
     .catch(err => next(err));
